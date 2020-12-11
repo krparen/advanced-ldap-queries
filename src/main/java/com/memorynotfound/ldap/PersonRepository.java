@@ -24,18 +24,16 @@ public class PersonRepository {
     @Autowired
     private LdapTemplate ldapTemplate;
 
-    public List<Person> getPersonNamesByLastName(String lastName) {
+    public List<Person> getPersonNamesByPhone(String phone) {
 
         LdapQuery query = query()
                 .searchScope(SearchScope.SUBTREE)
                 .timeLimit(THREE_SECONDS)
                 .countLimit(10)
-                .attributes("cn")
+                .attributes("cn", "sn", "phone", "email")
                 .base(LdapUtils.emptyLdapName())
                 .where("objectclass").is("person")
-                .and("sn").not().is(lastName)
-                .and("sn").like("j*hn")
-                .and("uid").isPresent();
+                .and("phone").is(phone);
 
         return ldapTemplate.search(query, new PersonAttributesMapper());
     }

@@ -24,6 +24,8 @@ objectclass: inetOrgPerson
 cn: John Doe
 sn: John
 uid: john
+phone: fakephone
+email: fakemail
 password: secret
 
 dn: uid=jihn,ou=people,dc=memorynotfound,dc=com
